@@ -45,6 +45,8 @@ const appData = {
     },
     reset: function () {
 
+        plusButton.disabled = false;
+
         resetButton.replaceWith(startButton);
         resetButton.style.display = "none";
 
@@ -99,6 +101,8 @@ const appData = {
 
     },
     start: function () {
+
+        plusButton.disabled = true;
 
         for (let i = 0; i < screens.length; i++) {
 
