@@ -96,9 +96,6 @@ const appData = {
         fullContent.value = 0;
         countRollback.value = 0;
         countOfscreen.value = 0;
-        console.log(this.servicesPercent);
-        console.log(this.servicesNumber);
-        console.log(this.screens);
 
     },
     start: function () {
