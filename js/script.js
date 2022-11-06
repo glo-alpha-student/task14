@@ -65,9 +65,9 @@ const appData = {
 
         }
 
-        const k = this.screens.findIndex(obj => obj.id === 0);
-        this.screens[k].price = 0;
-        this.screens[k].count = 0;
+        // const k = this.screens.findIndex(obj => obj.id === 0);
+        // this.screens[k].price = 0;
+        this.screens.pop();
 
         percentItems.forEach((item) => {
 
