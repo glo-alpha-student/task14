@@ -36,10 +36,6 @@ const appData = {
     },
     init: function () {
 
-        console.log(this.servicesPercent);
-        console.log(this.servicesNumber);
-        console.log(this.screens);
-
         this.addTitle();
 
         startButton.addEventListener('click', this.start.bind(this));
@@ -65,8 +61,6 @@ const appData = {
 
         }
 
-        // const k = this.screens.findIndex(obj => obj.id === 0);
-        // this.screens[k].price = 0;
         this.screens.pop();
 
         percentItems.forEach((item) => {
