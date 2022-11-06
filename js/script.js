@@ -36,6 +36,8 @@ const appData = {
     },
     init: function () {
 
+        console.log(this);
+
         this.addTitle();
 
         startButton.addEventListener('click', this.start.bind(this));
@@ -63,8 +65,6 @@ const appData = {
 
         }
 
-        this.screens.pop();
-
         percentItems.forEach((item) => {
 
             const check = item.querySelector('input[type=checkbox]');
@@ -80,14 +80,17 @@ const appData = {
 
         });
 
-        for (let myTears in this.servicesPercent) {
-            delete this.servicesPercent[myTears];
-        }
-
-        for (let myTears in this.servicesNumber) {
-            delete this.servicesNumber[myTears];
-        }
-
+        this.fullPrice = 0;
+        this.rollback = 0;
+        this.screenPrice = 0;
+        this.screens = [];
+        this.servicePercentPrice = 0;
+        this.servicePriceNumber = 0;
+        this.servicePricePercent = 0;
+        this.servicesNumber = {};
+        this.servicesPercent = {};
+        this.totalScreen = 0;
+        console.log(this);
 
         range.value = 0;
         span.textContent = 0 + "%";
@@ -124,6 +127,8 @@ const appData = {
         this.addServices();
         this.addPrices();
         this.showResult();
+
+        console.log(this);
 
     },
     showResult: function () {
