@@ -36,10 +36,14 @@ const appData = {
     },
     init: function () {
 
+        console.log(this.servicesPercent);
+        console.log(this.servicesNumber);
+        console.log(this.screens);
+
         this.addTitle();
 
         startButton.addEventListener('click', this.start.bind(this));
-        resetButton.addEventListener('click', this.reset.bind(appData));
+        resetButton.addEventListener('click', this.reset.bind(this));
         plusButton.addEventListener('click', this.addScreenblock.bind(this));
         range.addEventListener('input', this.addRange.bind(this));
     },
@@ -61,6 +65,10 @@ const appData = {
 
         }
 
+        const k = this.screens.findIndex(obj => obj.id === 0);
+        this.screens[k].price = 0;
+        this.screens[k].count = 0;
+
         percentItems.forEach((item) => {
 
             const check = item.querySelector('input[type=checkbox]');
@@ -76,6 +84,15 @@ const appData = {
 
         });
 
+        for (let myTears in this.servicesPercent) {
+            delete this.servicesPercent[myTears];
+        }
+
+        for (let myTears in this.servicesNumber) {
+            delete this.servicesNumber[myTears];
+        }
+
+
         range.value = 0;
         span.textContent = 0 + "%";
         range.disabled = false;
@@ -85,15 +102,9 @@ const appData = {
         fullContent.value = 0;
         countRollback.value = 0;
         countOfscreen.value = 0;
-
-        // this.screenPrice = '';
-        // this.servicePricePercent = '';
-        // this.servicePriceNumber = '';
-        // this.fullPrice = '';
-        // this.servicePercentPrice = '';
-        // this.totalScreen = '';
-        // console.log(this.fullPrice);
-
+        console.log(this.servicesPercent);
+        console.log(this.servicesNumber);
+        console.log(this.screens);
 
     },
     start: function () {
