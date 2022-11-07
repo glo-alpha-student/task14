@@ -35,9 +35,6 @@ const appData = {
         document.title = titleName.textContent;
     },
     init: function () {
-
-        console.log(this);
-
         this.addTitle();
 
         startButton.addEventListener('click', this.start.bind(this));
@@ -46,24 +43,30 @@ const appData = {
         range.addEventListener('input', this.addRange.bind(this));
     },
     reset: function () {
-
         plusButton.disabled = false;
 
-        resetButton.replaceWith(startButton);
         resetButton.style.display = "none";
+        startButton.style.display = "block";
 
-        const saveMe = screens[0];
+        for (let i = 0; i < screens.length; i++) {
+            if (i) {
 
-        saveMe.querySelector('select').disabled = false;
-        saveMe.querySelector('input').value = '';
-        saveMe.querySelector('input').disabled = false;
-        saveMe.querySelector('select').value = '';
+                screens[i].remove();
+            } else {
 
-        for (let i = 1; i < screens.length; i++) {
+                const select = screens[i].querySelector('select');
+                const input = screens[i].querySelector('input');
 
-            screens[i].remove();
+                select.disabled = false;
+                select.value = '';
+                input.disabled = false;
+                input.value = '';
+
+            }
 
         }
+
+        screens = document.querySelectorAll('.screen');
 
         percentItems.forEach((item) => {
 
@@ -90,7 +93,6 @@ const appData = {
         this.servicesNumber = {};
         this.servicesPercent = {};
         this.totalScreen = 0;
-        console.log(this);
 
         range.value = 0;
         span.textContent = 0 + "%";
@@ -101,10 +103,8 @@ const appData = {
         fullContent.value = 0;
         countRollback.value = 0;
         countOfscreen.value = 0;
-
     },
     start: function () {
-
         plusButton.disabled = true;
 
         for (let i = 0; i < screens.length; i++) {
@@ -117,9 +117,8 @@ const appData = {
             }
         }
 
-        startButton.replaceWith(resetButton);
-
-        resetButton.style.display = "inline";
+        startButton.style.display = "none";
+        resetButton.style.display = "block";
 
         range.disabled = true;
 
@@ -127,27 +126,19 @@ const appData = {
         this.addServices();
         this.addPrices();
         this.showResult();
-
-        console.log(this);
-
     },
     showResult: function () {
-
         total.value = this.screenPrice;
         countOther.value = this.servicePricePercent + this.servicePriceNumber;
         fullContent.value = this.fullPrice;
         countRollback.value = this.servicePercentPrice;
         countOfscreen.value = this.totalScreen;
-
     },
     addRange: function () {
-
         span.textContent = range.value + "%";
         this.rollback = range.value;
-
     },
     addScreens: function () {
-
         screens.forEach((screen, index) => {
             const select = screen.querySelector('select');
             const input = screen.querySelector('input');
@@ -164,10 +155,8 @@ const appData = {
             input.disabled = true;
 
         });
-
     },
     addServices: function () {
-
         percentItems.forEach((item) => {
 
             const check = item.querySelector('input[type=checkbox]');
@@ -179,9 +168,7 @@ const appData = {
 
             }
             check.disabled = true;
-
         });
-
         numberItems.forEach((item) => {
 
             const check = item.querySelector('input[type=checkbox]');
@@ -194,22 +181,14 @@ const appData = {
             }
             check.disabled = true;
         });
-
     },
     addScreenblock: function () {
-
         const cloneScreen = screens[0].cloneNode(true);
-
         cloneScreen.querySelector('input').value = '';
-
         screens[screens.length - 1].after(cloneScreen);
-
         screens = document.querySelectorAll('.screen');
-
-
     },
     addPrices: function () {
-
         for (let myTears of this.screens) {
             this.screenPrice += +myTears.price;
         }
@@ -224,11 +203,8 @@ const appData = {
         }
 
         this.fullPrice = this.screenPrice + this.servicePriceNumber + this.servicePricePercent;
-
         this.servicePercentPrice = this.fullPrice - Math.ceil((this.fullPrice * (this.rollback / 100)));
-
     },
-
 };
 
 appData.init();
